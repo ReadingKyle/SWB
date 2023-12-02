@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWB", "SWB\SWB.csproj", "{2C83A6CE-4D5E-4B03-81FF-08B64BE4328E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TilemapPipelineExtension", "TilemapPipelineExtension\TilemapPipelineExtension.csproj", "{EE94B8DC-4EE9-460A-BAB1-CBF51A1288C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A0759E0-7FAD-470B-A4A5-27D585546B10}"
+	ProjectSection(SolutionItems) = preProject
+		README.txt = README.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C83A6CE-4D5E-4B03-81FF-08B64BE4328E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C83A6CE-4D5E-4B03-81FF-08B64BE4328E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C83A6CE-4D5E-4B03-81FF-08B64BE4328E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C83A6CE-4D5E-4B03-81FF-08B64BE4328E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE94B8DC-4EE9-460A-BAB1-CBF51A1288C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE94B8DC-4EE9-460A-BAB1-CBF51A1288C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE94B8DC-4EE9-460A-BAB1-CBF51A1288C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE94B8DC-4EE9-460A-BAB1-CBF51A1288C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0996FD67-D90B-4130-A00E-3D8BBADCBB60}
+	EndGlobalSection
+EndGlobal
