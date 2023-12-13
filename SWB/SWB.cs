@@ -33,7 +33,7 @@ namespace SWB
 
         private void AddInitialScreens()
         {
-            _screenManager.AddScreen(new MenuScreen());
+            _screenManager.AddScreen(new TitleScreen());
             _screenManager.AddScreen(new SplashScreen());
         }
 
@@ -50,8 +50,6 @@ namespace SWB
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             // TODO: Add your update logic here
 
@@ -60,7 +58,7 @@ namespace SWB
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DodgerBlue);
 
             // TODO: Add your drawing code here
 

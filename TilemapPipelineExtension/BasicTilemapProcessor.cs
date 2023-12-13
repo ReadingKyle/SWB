@@ -63,20 +63,21 @@ namespace TilemapPipelineExtension
                     {
                         ID = map.TileIndices[index],
                         SourceRectangle = map.TileSet[map.TileIndices[index]],
+                        Index = index,
+                        Position = new Vector2(x * map.TileWidth * (int)Scale, y * map.TileHeight * (int)Scale),
+                        InitialPosition = new Rectangle(x * map.TileWidth * (int)Scale, y * map.TileHeight * (int)Scale, map.TileWidth * (int)Scale, map.TileHeight * (int)Scale),
+                        Velocity = new Vector2(0, 0),
                     };
                     context.Logger.LogMessage($"{index}");
                     context.Logger.LogMessage($"{map.Tiles[index].ID}");
                     if (map.Tiles[index].ID >= 1 && map.Tiles[index].ID <= 8 || map.Tiles[index].ID >= 24 && map.Tiles[index].ID <= 27)
                     {
-                        map.Tiles[index].Bounds = new Rectangle[1]
-                        {
-                            new Rectangle (
-                                (int)(x * map.TileWidth * Scale),
-                                (int)(y * map.TileHeight * Scale),
-                                (int)(map.TileWidth * Scale),
-                                (int)(map.TileHeight * Scale)
-                            )
-                        };
+                        map.Tiles[index].Bounds = new Rectangle (
+                            (int)(x * map.TileWidth * Scale),
+                            (int)(y * map.TileHeight * Scale),
+                            (int)(map.TileWidth * Scale),
+                            (int)(map.TileHeight * Scale)
+                        );
                     }
                 }
             }

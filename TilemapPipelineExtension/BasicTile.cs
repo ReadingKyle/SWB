@@ -12,8 +12,12 @@ namespace TilemapPipelineExtension
     public class BasicTile
     {
         public Rectangle SourceRectangle;
-        public Rectangle PositionRectangle;
-        public Rectangle[] Bounds;
+        public Vector2 Position;
+        public Rectangle InitialPosition;
+        public Rectangle Bounds;
         public int ID;
+        public int Index;
+        public Vector2 Velocity;
+        public bool Destroyed;
     }
 }

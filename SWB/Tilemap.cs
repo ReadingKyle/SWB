@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SWB
@@ -50,7 +51,7 @@ namespace SWB
         /// </summary>
         /// <param name="other">other sprite</param>
         /// <returns></returns>
-        public List<CollisionDirection> CollidesWith(Rectangle player, Rectangle tile)
+        public CollisionDirection CollidesWith(Rectangle player, Rectangle tile)
         {
             return CollisionHelper.Collides(player, tile);
         }
@@ -60,21 +61,32 @@ namespace SWB
         /// </summary>
         public int[] TileIndices { get; init; }
 
-        public List<CollisionDirection> Update(GameTime gameTime, Rectangle playerHitbox)
+        public Dictionary<Tile, CollisionDirection> Update(GameTime gameTime, Rectangle playerHitbox, bool canDestroy, SoundEffectInstance breakSound)
         {
-            List<CollisionDirection> result = new List<CollisionDirection>();
+            Dictionary<Tile, CollisionDirection> result = new Dictionary<Tile, CollisionDirection>();
             foreach (var tile in Tiles)
             {
-                if (tile.Bounds != null)
+                if (tile.Position.Y < 416)
                 {
-                    foreach (var bound in tile.Bounds)
+                    CollisionDirection direction = CollidesWith(playerHitbox, tile.Bounds);
+                    if (direction != CollisionDirection.NoCollision)
                     {
-                        List<CollisionDirection> directions = CollidesWith(playerHitbox, bound);
-                        if (directions.Count != 0)
+                        result[tile] = direction;
+                    }
+                    if (direction == CollisionDirection.CollisionTop && (tile.ID == 7 || tile.ID == 5) && tile.Velocity.Y == 0)
+                    {
+                        if (canDestroy && tile.ID == 7)
                         {
-                            result.AddRange(directions);
+                            tile.Velocity.Y = -100;
+                            tile.Destroyed = true;
+                            breakSound.Play();
+                        }
+                        else
+                        {
+                            tile.Velocity.Y = -16.5f;
                         }
                     }
+                    tile.Update(gameTime);
                 }
             }
             return result;
@@ -87,7 +99,7 @@ namespace SWB
         /// <param name="spriteBatch">a spritebatch to draw with</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            for(int y = 0; y < MapHeight; y++)
+            /*for(int y = 0; y < MapHeight; y++)
             {
                 for(int x = 0; x < MapWidth; x++)
                 {
@@ -110,8 +122,26 @@ namespace SWB
                         Color.White
                     );
                 }
-            }
+            }*/
+            foreach (Tile tile in Tiles)
+            {
+                Rectangle source = new Rectangle
+                (
+                    (int)tile.Position.X,
+                    (int)tile.Position.Y,
+                    tile.InitialPosition.Width,
+                    tile.InitialPosition.Height
+                );
+                int index = tile.ID - 1;
+                if (index == -1) continue;
 
+                spriteBatch.Draw(
+                    TilesetTexture,
+                    source,
+                    TileSet[index],
+                    Color.White
+                );
+            }
         }
     }
 }

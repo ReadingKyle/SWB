@@ -23,30 +23,33 @@ namespace SWB
         /// <param name="a">The first rectangle</param>
         /// <param name="b">The second rectangle</param>
         /// <returns>true for collision, false otherwise</returns>
-        public static List<CollisionDirection> Collides(Rectangle a, Rectangle b)
+        public static CollisionDirection Collides(Rectangle a, Rectangle b)
         {
-            List<CollisionDirection> result = new List<CollisionDirection>();
-            if (!(a.Right < b.Left || a.Left > b.Right ||
-                    a.Top > b.Bottom || a.Bottom < b.Top))
+            CollisionDirection result = CollisionDirection.NoCollision;
+
+            if (a.Intersects(b))
             {
-                if ((a.Right > b.Left && a.Left < b.Right) && a.Top < b.Bottom)
+                int overlapX = Math.Min(a.Right, b.Right) - Math.Max(a.Left, b.Left);
+                int overlapY = Math.Min(a.Bottom, b.Bottom) - Math.Max(a.Top, b.Top);
+
+                if (overlapX >= overlapY)
                 {
-                    result.Add(CollisionDirection.CollisionTop);
+                    if (a.Top < b.Top)
+                        result = CollisionDirection.CollisionBottom;
+                    else
+                        result = CollisionDirection.CollisionTop;
                 }
-                else if ((a.Right > b.Left && a.Left < b.Right) && a.Bottom > b.Top)
+                else
                 {
-                    result.Add(CollisionDirection.CollisionBottom);
-                }
-                if ((a.Top < b.Bottom && a.Bottom-2 > b.Top) && a.Right > b.Left)
-                {
-                    result.Add(CollisionDirection.CollisionRight);
-                }
-                else if ((a.Top < b.Bottom && a.Bottom-2 > b.Top) && a.Left < b.Right)
-                {
-                    result.Add(CollisionDirection.CollisionLeft);
+                    if (a.Left < b.Left)
+                        result = CollisionDirection.CollisionRight;
+                    else
+                        result = CollisionDirection.CollisionLeft;
                 }
             }
+
             return result;
         }
+
     }
 }

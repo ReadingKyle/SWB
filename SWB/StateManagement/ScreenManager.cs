@@ -27,6 +27,10 @@ namespace SWB.StateManagement
 
         private bool _isInitialized;
 
+        public int Score;
+
+        public int Lives = 3;
+
         /// <summary>
         /// A SpriteBatch shared by all GameScreens
         /// </summary>
@@ -46,7 +50,7 @@ namespace SWB.StateManagement
         /// </summary>
         public Texture2D BlankTexture { get; private set; }
 
-        //public Song Song { get; private set; }
+        public Song Song { get; private set; }
 
         /// <summary>
         /// Constructs a new ScreenManager
@@ -76,16 +80,16 @@ namespace SWB.StateManagement
             SmallFont = _content.Load<SpriteFont>("smallfont");
             BigFont = _content.Load<SpriteFont>("bigfont");
             BlankTexture = _content.Load<Texture2D>("blank");
-            //Song = _content.Load<Song>("ready-set-drift-michael-grubb-main-version-24555-02-59");
+            Song = _content.Load<Song>("itty-bitty-8-bit-kevin-macleod-main-version-03-13-7983");
 
             // Tell each of the screens to load thier content 
             foreach (var screen in _screens)
             {
                 screen.Activate();
             }
-            /*MediaPlayer.IsRepeating = true;
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(Song);
-            MediaPlayer.Volume = (float)0.5;*/
+            MediaPlayer.Volume = (float)0.5;
         }
 
         /// <summary>

@@ -14,6 +14,7 @@ namespace SWB
         public bool IsSquished;
         public bool IsDead;
         public Vector2 Velocity;
+        public bool IsShelled;
 
         private Texture2D _texture;
 
@@ -28,7 +29,7 @@ namespace SWB
         {
             Position = position;
             _texture = texture;
-            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
+            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
             Velocity = new Vector2(-1, 0);
         }
 
@@ -52,8 +53,13 @@ namespace SWB
 
         public void Draw (GameTime gameTime, SpriteBatch spriteBatch)
         {
+            SpriteEffects direction = SpriteEffects.None;
             if (!IsDead)
             {
+                if (IsShelled)
+                {
+                    direction = SpriteEffects.FlipVertically;
+                }
                 if (IsSquished)
                 {
                     _animationFrame = 2;
@@ -79,7 +85,7 @@ namespace SWB
                 0,
                 new Vector2(0, 0),
                 2f,
-                SpriteEffects.None,
+                direction,
                 0
             );
             }
